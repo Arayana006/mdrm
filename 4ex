@@ -1,0 +1,38 @@
+Задание:
+1. Создайте репозиторий "GitChallenge" на GitHub.
+2. Инициализируйте его README.md.
+3. Создайте ветку "feature-branch" и добавьте строку в README.md.
+4. Создайте ветку "bugfix-branch" и измените строку в README.md.
+5. Слейте изменения из "feature-branch" в "master".
+6. Отмените последний коммит в "bugfix-branch".
+7. Слейте изменения из "bugfix-branch" в "master".
+8. Загрузите изменения в репозиторий.
+
+Решение:
+gbash
+git init GitChallenge
+cd GitChallenge
+echo "Git Challenge Repository" > README.md
+git add README.md
+git commit -m "Initial commit"
+git remote add origin ссылка_на_репозиторий
+git push -u origin master
+
+git checkout -b feature-branch
+echo "Feature Content" >> README.md
+git commit -am "Add feature content to README"
+
+git checkout -b bugfix-branch
+sed -i 's/Git Challenge/Git Challenge (Fixed)/' README.md
+git commit -am "Fix existing content in README"
+
+git checkout master
+git merge feature-branch
+
+git checkout bugfix-branch
+git reset --hard HEAD~1
+
+git checkout master
+git merge bugfix-branch
+
+git push origin master
